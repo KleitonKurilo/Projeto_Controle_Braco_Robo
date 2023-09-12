@@ -6,20 +6,21 @@
 
 #include <ESP32Servo.h>
 
-// create four servo objects 
-
-
+// Cria objetos Servo 
 Servo myservo_base;
 Servo myservo_ombro;
 Servo myservo_cot;
 Servo myservo_pun;
 Servo myservo_mao;
+
+// Pinos GPIO Esp32
 int servoPinBase = 13;
 int servoPinOmbro = 12;
 int servoPinCot = 14;
 int servoPinPun = 27;
 int servoPinMao = 26;
 
+// Posicao Incial Servo 0°
 int pos_servo_base = 0;
 int pos_servo_ombro = 0;
 int pos_servo_cot = 0;
@@ -32,14 +33,15 @@ int servo_cot_coordenada_arm;
 int servo_pun_coordenada_arm;
 int servo_mao_coordenada_arm;
 
+// Configura Rede e Servidor MQTT
+const char* ssid = ".....";
+const char* password = ".....";
+const char* mqtt_server = "....";
+const char* mqtt_topic = ".....";
 
-const char* ssid = "***";
-const char* password = "*****";
-const char* mqtt_server = "*****";
-const char* mqtt_topic = "*****";
 
 
-
+// Configura Watchdog
 
 const int button = 0;         //gpio to use to trigger delay
 const int wdtTimeout = 5000;  //time in ms to trigger the watchdog
@@ -111,13 +113,7 @@ void setup() {
       delay(1000);
     }
   }
-
-
-}
-
-void loop() {
-
-   timerWrite(timer, 0); //reset timer (feed watchdog)
+     timerWrite(timer, 0); //reset timer (feed watchdog)
 
 
    myservo_base.write( pos_servo_base);
@@ -148,6 +144,14 @@ void loop() {
 
 
        delay(3000);
+   timerWrite(timer, 0); //reset timer (feed watchdog)
+
+
+}
+
+void loop() {
+
+   
    timerWrite(timer, 0); //reset timer (feed watchdog)
 
 
